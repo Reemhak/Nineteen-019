@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nineteen #019 | المتجر الأفضل والأوثق للخدمات الإلكترونية</title>
+    <!-- استدعاء الخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0d1117;
+            --card-bg: #161b22;
+            --card-border: #30363d;
+            --accent-logo: #00d2ff;
+            --accent-gold: #d4af37;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --pixel-font: 'Press Start 2P', monospace;
+            --main-font: 'Tajawal', sans-serif;
+            --danger-red: #f85149;
+            --success-green: #2ea043;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--main-font);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- إشعار عام --- */
+        .toast-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #161b22;
+            border: 1px solid var(--success-green);
+            color: var(--success-green);
+            font-family: var(--main-font);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 2000;
+            transition: all 0.4s ease;
+            opacity: 0;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            top: 20px;
+            opacity: 1;
+        }
+
+        /* --- الهيدر --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 5%;
+            background: rgba(22, 27, 34, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--pixel-font);
+            font-size: 0.95rem;
+            color: var(--accent-logo);
+            text-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+            letter-spacing: -0.5px;
+            text-align: right;
+        }
+
+        .logo span {
+            color: #ffffff;
+            display: block;
+            font-size: 0.55rem;
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-header {
+            background: #21262d;
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--main-font);
+            font-weight: 700;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.2s;
+            height: 36px;
+            white-space: nowrap;
+        }
+
+        .btn-header:hover {
+            background: #30363d;
+            border-color: #8b949e;
+        }
+
+        .cart-count {
+            background: var(--accent-gold);
+            color: #000;
+            border-radius: 10px;
+            padding: 1px 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        /* --- الهيرو --- */
+        .hero {
+            text-align: center;
+            padding: 35px 20px 20px;
+        }
+
+        .hero p {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 800;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- قسم المنتجات --- */
+        .products-section {
+            max-width: 1200px;
+            margin: 20px auto 60px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 16px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.2s ease;
+        }
+
+        .product-card:hover {
+            border-color: #8b949e;
+            transform: translateY(-3px);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 170px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            background: #0d1117;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--card-border);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .price-stock-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .product-price {
+            color: var(--accent-gold);
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .stock-badge {
+            background: rgba(248, 81, 73, 0.12);
+            color: var(--danger-red);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 6px;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 9px;
+            background: #21262d;
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: var(--main-font);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-add:hover {
+            background: var(--text-primary);
+            color: #000;
+        }
+
+        /* --- النوافذ المنبثقة العامة --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            padding: 24px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        /* --- عناصر السلة --- */
+        .cart-items {
+            margin-bottom: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #0d1117;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            text-align: right;
+        }
+
+        .cart-item-title {
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            background: #21262d;
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            width: 26px;
+            height: 26px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #30363d;
+        }
+
+        .qty-number {
+            padding: 0 6px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .btn-delete {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid var(--danger-red);
+            color: var(--danger-red);
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-delete:hover {
+            background: var(--danger-red);
+            color: #fff;
+        }
+
+        .coupon-box {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: #0d1117;
+            color: var(--text-primary);
+            font-family: var(--main-font);
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: #58a6ff;
+        }
+
+        .btn-coupon {
+            background: #21262d;
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            padding: 0 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-coupon:hover {
+            background: #30363d;
+        }
+
+        .summary-card {
+            background: #0d1117;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 14px;
+            margin: 15px 0;
+            text-align: right;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-row.total {
+            border-top: 1px solid var(--card-border);
+            padding-top: 8px;
+            margin-bottom: 0;
+            color: var(--text-primary);
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent-gold);
+            border: none;
+            color: #000;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-checkout:hover {
+            background: #e3b341;
+        }
+
+        .whatsapp-notice {
+            color: var(--danger-red);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .support-info {
+            text-align: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--card-border);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            direction: ltr;
+        }
+
+        /* --- النافذة المربعة الصغيرة لإظهار رقم الطلب مع زر تم --- */
+        .small-order-card {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-gold);
+            border-radius: 14px;
+            width: 320px;
+            padding: 22px 18px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .small-order-text {
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .small-order-number {
+            color: var(--accent-gold);
+            font-family: var(--pixel-font);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .small-order-warning {
+            color: var(--danger-red);
+            font-weight: 800;
+            font-size: 0.82rem;
+            line-height: 1.4;
+            margin-top: 10px;
+            border-top: 1px dashed var(--card-border);
+            padding-top: 10px;
+            margin-bottom: 16px;
+        }
+
+        .btn-done {
+            width: 100%;
+            padding: 10px;
+            background: var(--accent-gold);
+            border: none;
+            color: #000;
+            font-family: var(--main-font);
+            font-weight: 800;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-done:hover {
+            background: #e3b341;
+        }
+
+        /* --- نموذج تسجيل الدخول ولوحة التحكم --- */
+        .form-group {
+            margin-bottom: 14px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-submit-admin {
+            width: 100%;
+            padding: 10px;
+            background: var(--accent-logo);
+            border: none;
+            color: #000;
+            font-weight: 800;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-submit-admin:hover {
+            opacity: 0.9;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .order-card {
+            background: #0d1117;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+
+        .order-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+        }
+
+        .order-id {
+            color: var(--accent-gold);
+            font-weight: 800;
+            font-family: var(--pixel-font);
+            font-size: 0.85rem;
+        }
+
+        .order-date {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .order-items-list {
+            list-style: none;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .order-items-list li {
+            padding: 2px 0;
+            color: var(--text-secondary);
+        }
+
+        /* --- الفوتر --- */
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        footer .footer-logo {
+            font-family: var(--pixel-font);
+            font-size: 0.75rem;
+            color: var(--accent-logo);
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- إشعار عام -->
+    <div class="toast-notification" id="toastNotification">
+        تم الإجراء بنجاح
+    </div>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="logo">
+            NINETEEN
+            <span>#019</span>
+        </div>
+        
+        <div class="header-actions">
+            <button class="btn-header" onclick="openLoginModal()">
+                تسجيل الدخول
+            </button>
+
+            <button class="btn-header" onclick="openCart()">
+                السلة <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- الهيرو -->
+    <section class="hero">
+        <p>المتجر الأفضل والأوثق للخدمات الإلكترونية</p>
+    </section>
+
+    <!-- قائمة المنتجات -->
+    <section class="products-section">
+        <h2 class="section-title">المنتجات المميزة</h2>
+        
+        <div class="products-grid">
+
+            <!-- 1. انفنتي تريل -->
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531828869663821905/IMG_2850.png?ex=6a6aa24e&is=6a6950ce&hm=508321801e68506367a673e349acf769e498890d059a45dd9badf0fcb9bf4f05&" alt="انفنتي تريل">
+                </div>
+                <div class="product-info">
+                    <div class="product-title" style="color: #ffffff;">انفنتي تريل</div>
+                    <div class="price-stock-row">
+                        <div class="product-price">74.34 ريال</div>
+                        <div class="stock-badge">متبقي <span class="random-stock"></span></div>
+                    </div>
+                </div>
+                <button class="btn-add" onclick="addToCart('انفنتي تريل', 74.34)">أضف للسلة</button>
+            </div>
+
+            <!-- 2. سير الادمن -->
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531826991509143652/IMG_2319.png?ex=6a6aa08e&is=6a694f0e&hm=49be6fbd78646fc68cfa3ea509770108907a324a21af7b8d29e78012a256ec52&" alt="سير الادمن">
+                </div>
+                <div class="product-info">
+                    <div class="product-title" style="color: #ff4d6d;">سير الادمن</div>
+                    <div class="price-stock-row">
+                        <div class="product-price">50.73 ريال</div>
+                        <div class="stock-badge">متبقي <span class="random-stock"></span></div>
+                    </div>
+                </div>
+                <button class="btn-add" onclick="addToCart('سير الادمن', 50.73)">أضف للسلة</button>
+            </div>
+
+            <!-- 3. سير الكاندي -->
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531826991744160015/IMG_2318.png?ex=6a6aa08e&is=6a694f0e&hm=62a040c15e3b99b0ee96c97a9e7855b5bdae8de14d7e233799aaedff296c46b4&" alt="سير الكاندي">
+                </div>
+                <div class="product-info">
+                    <div class="product-title" style="color: #ff70a6;">سير الكاندي</div>
+                    <div class="price-stock-row">
+                        <div class="product-price">31.97 ريال</div>
+                        <div class="stock-badge">متبقي <span class="random-stock"></span></div>
+                    </div>
+                </div>
+                <button class="btn-add" onclick="addToCart('سير الكاندي', 31.97)">أضف للسلة</button>
+            </div>
+
+            <!-- 4. سير الدايموند -->
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531826992360591480/IMG_2317.png?ex=6a6aa08e&is=6a694f0e&hm=5be4d31d092649bad718936aec54783a3236481a1a4fe99d9c06b00318f57f16&" alt="سير الدايموند">
+                </div>
+                <div class="product-info">
+                    <div class="product-title" style="color: #79c0ff;">سير الدايموند</div>
+                    <div class="price-stock-row">
+                        <div class="product-price">16.73 ريال</div>
+                        <div class="stock-badge">متبقي <span class="random-stock"></span></div>
+                    </div>
+                </div>
+                <button class="btn-add" onclick="addToCart('سير الدايموند', 16.73)">أضف للسلة</button>
+            </div>
+
+            <!-- 5. سير القولد -->
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531826992012329101/IMG_2320.png?ex=6a6aa08e&is=6a694f0e&hm=912f2b040cf580b5d21858e33a8a3b8d64928db3331c3bacce46a9743e9d920f&" alt="سير القولد">
+                </div>
+                <div class="product-info">
+                    <div class="product-title" style="color: #e3b341;">سير القولد</div>
+                    <div class="price-stock-row">
+                        <div class="product-price">7.73 ريال</div>
+                        <div class="stock-badge">متبقي <span class="random-stock"></span></div>
+                    </div>
+                </div>
+                <button class="btn-add" onclick="addToCart('سير القولد', 7.73)">أضف للسلة</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- نافذة السلة Modal -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>سلة المشتريات</h3>
+                <button class="close-btn" onclick="closeCart()">&times;</button>
+            </div>
+
+            <div class="cart-items" id="cartItems">
+                <p style="text-align: center; color: var(--text-secondary); padding: 20px 0;">السلة فارغة حالياً</p>
+            </div>
+
+            <div class="coupon-box">
+                <input type="text" id="couponInput" class="form-control" placeholder="كود الخصم">
+                <button class="btn-coupon" onclick="applyCoupon()">تطبيق</button>
+            </div>
+            <div id="couponMsg" style="font-size: 0.85rem; margin-bottom: 8px; text-align: right;"></div>
+
+            <div class="summary-card">
+                <div class="summary-row">
+                    <span>المجموع الفرعي</span>
+                    <span id="subTotal">0.00 ريال</span>
+                </div>
+                <div class="summary-row">
+                    <span>الخصم</span>
+                    <span id="discountVal">0.00 ريال</span>
+                </div>
+                <div class="summary-row total">
+                    <span>الإجمالي النهائي</span>
+                    <span id="cartTotal" style="color: var(--accent-gold);">0.00 ريال</span>
+                </div>
+            </div>
+
+            <button class="btn-checkout" onclick="checkout()">تأكيد الطلب</button>
+            
+            <div class="whatsapp-notice">
+                * عند تأكيد الطلب تواصل معنا بالواتس للتفعيل
+            </div>
+
+            <div class="support-info">
+                رقم الدعم والتفعيل : +966555304465
+            </div>
+        </div>
+    </div>
+
+    <!-- النافذة المربعة الصغيرة لإظهار رقم الطلب مع زر "تم" -->
+    <div class="modal-overlay" id="orderSuccessModal">
+        <div class="small-order-card">
+            <div class="small-order-text">
+                هذا رقم الطلب حقك ! <br>
+                <span class="small-order-number" id="displayGeneratedCode">#000000</span>
+            </div>
+            <div class="small-order-warning">
+                * في حال غلطت برقم الطلب عند التفعيل حنا غير مسؤولين
+            </div>
+            <button class="btn-done" onclick="closeOrderSuccessModal()">تم</button>
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل الدخول Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-card" style="max-width: 380px;">
+            <div class="modal-header">
+                <h3>تسجيل دخول الإدارة</h3>
+                <button class="close-btn" onclick="closeLoginModal()">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>اسم المستخدم</label>
+                <input type="text" id="adminUser" class="form-control" placeholder="أدخل اسم المستخدم">
+            </div>
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input type="password" id="adminPass" class="form-control" placeholder="أدخل كلمة المرور">
+            </div>
+            <button class="btn-submit-admin" onclick="handleLogin()">دخول</button>
+        </div>
+    </div>
+
+    <!-- نافذة لوحة الطلبات Admin Orders Modal -->
+    <div class="modal-overlay" id="ordersModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>لوحة إدارة الطلبات</h3>
+                <button class="close-btn" onclick="closeOrdersModal()">&times;</button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" id="searchOrderInput" class="form-control" placeholder="أدخل رقم الطلب (مثال: #123456)">
+                <button class="btn-coupon" onclick="searchOrders()">بحث</button>
+                <button class="btn-coupon" onclick="renderOrdersList(allOrders)">الكل</button>
+            </div>
+
+            <div id="ordersContainer">
+                <!-- يتم عرض الطلبات هنا برمجياً -->
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-logo">NINETEEN #019</div>
+        <p>&copy; 2026 جميع الحقوق محفوظة لـ Nineteen #019</p>
+    </footer>
+
+    <!-- البرمجة -->
+    <script>
+        let cart = [];
+        let discountRate = 0;
+        let toastTimeout;
+
+        let allOrders = JSON.parse(localStorage.getItem('nineteen_orders') || '[]');
+        let usedOrderNumbers = new Set(JSON.parse(localStorage.getItem('nineteen_used_ids') || '[]'));
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.random-stock').forEach(el => {
+                const randomNum = Math.floor(Math.random() * (49 - 11 + 1)) + 11;
+                el.innerText = randomNum;
+            });
+        });
+
+        function showToast(text) {
+            const toast = document.getElementById('toastNotification');
+            toast.innerText = text;
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function addToCart(title, price) {
+            let existingItem = cart.find(item => item.title === title);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ title, price, quantity: 1 });
+            }
+            updateCartUI();
+            showToast('تم إضافة المنتج إلى السلة');
+        }
+
+        function changeQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            let totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').innerText = totalCount;
+
+            const cartItemsContainer = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px 0;">السلة فارغة حالياً</p>';
+            } else {
+                cartItemsContainer.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-details">
+                            <span class="cart-item-title">${item.title}</span>
+                            <span class="cart-item-price">${(item.price * item.quantity).toFixed(2)} ريال</span>
+                        </div>
+                        <div class="cart-controls">
+                            <div class="quantity-control">
+                                <button class="qty-btn" onclick="changeQuantity(${index}, 1)">+</button>
+                                <span class="qty-number">${item.quantity}</span>
+                                <button class="qty-btn" onclick="changeQuantity(${index}, -1)">-</button>
+                            </div>
+                            <button class="btn-delete" onclick="removeItem(${index})" title="حذف المنتج">حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let discount = subtotal * discountRate;
+            let total = subtotal - discount;
+
+            document.getElementById('subTotal').innerText = subtotal.toFixed(2) + ' ريال';
+            document.getElementById('discountVal').innerText = discount.toFixed(2) + ' ريال';
+            document.getElementById('cartTotal').innerText = total.toFixed(2) + ' ريال';
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('couponInput').value.trim().toUpperCase();
+            const msgBox = document.getElementById('couponMsg');
+
+            if (code === 'NINETEEN90') {
+                discountRate = 0.90;
+                msgBox.style.color = 'var(--success-green)';
+                msgBox.innerText = 'تم تطبيق خصم 90% بنجاح!';
+            } else if (code === 'SAVE10') {
+                discountRate = 0.10;
+                msgBox.style.color = 'var(--success-green)';
+                msgBox.innerText = 'تم تطبيق خصم 10% بنجاح!';
+            } else {
+                discountRate = 0;
+                msgBox.style.color = 'var(--danger-red)';
+                msgBox.innerText = 'كود الخصم غير صحيح!';
+            }
+            calculateTotal();
+        }
+
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function generateUniqueOrderId() {
+            let orderId;
+            let random6Digits;
+            do {
+                random6Digits = Math.floor(100000 + Math.random() * 900000);
+                orderId = '#' + random6Digits;
+            } while (usedOrderNumbers.has(orderId));
+
+            usedOrderNumbers.add(orderId);
+            localStorage.setItem('nineteen_used_ids', JSON.stringify([...usedOrderNumbers]));
+            return orderId;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('السلة فارغة!');
+                return;
+            }
+
+            const newOrderId = generateUniqueOrderId();
+            const totalAmount = document.getElementById('cartTotal').innerText;
+
+            const orderData = {
+                id: newOrderId,
+                items: [...cart],
+                total: totalAmount,
+                date: new Date().toLocaleString('ar-SA')
+            };
+
+            allOrders.unshift(orderData);
+            localStorage.setItem('nineteen_orders', JSON.stringify(allOrders));
+
+            cart = [];
+            discountRate = 0;
+            document.getElementById('couponInput').value = '';
+            document.getElementById('couponMsg').innerText = '';
+            updateCartUI();
+            closeCart();
+
+            // إظهار النافذة المربعة مع رقم الطلب وزر تم
+            document.getElementById('displayGeneratedCode').innerText = newOrderId;
+            document.getElementById('orderSuccessModal').style.display = 'flex';
+        }
+
+        function closeOrderSuccessModal() {
+            document.getElementById('orderSuccessModal').style.display = 'none';
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function handleLogin() {
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+
+            if (user === 'Reem' && pass === 'NINETEEN1122!') {
+                showToast('تم تسجيل الدخول بنجاح!');
+                closeLoginModal();
+                document.getElementById('adminUser').value = '';
+                document.getElementById('adminPass').value = '';
+                openOrdersModal();
+            } else {
+                alert('خطأ: اسم المستخدم أو كلمة المرور غير صحيحة!');
+            }
+        }
+
+        function openOrdersModal() {
+            document.getElementById('ordersModal').style.display = 'flex';
+            renderOrdersList(allOrders);
+        }
+
+        function closeOrdersModal() {
+            document.getElementById('ordersModal').style.display = 'none';
+        }
+
+        function renderOrdersList(ordersToRender) {
+            const container = document.getElementById('ordersContainer');
+            if (ordersToRender.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px 0;">لا توجد طلبات لعرضها حالياً.</p>';
+                return;
+            }
+
+            container.innerHTML = ordersToRender.map(order => `
+                <div class="order-card">
+                    <div class="order-card-header">
+                        <span class="order-id">${order.id}</span>
+                        <span class="order-date">${order.date}</span>
+                    </div>
+                    <ul class="order-items-list">
+                        ${order.items.map(item => `<li>• ${item.title} (العدد: ${item.quantity}) - ${(item.price * item.quantity).toFixed(2)} ريال</li>`).join('')}
+                    </ul>
+                    <div style="font-weight: 800; color: var(--accent-gold); font-size: 0.9rem;">
+                        المبلغ الإجمالي: ${order.total}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function searchOrders() {
+            const query = document.getElementById('searchOrderInput').value.trim();
+            if (!query) {
+                renderOrdersList(allOrders);
+                return;
+            }
+
+            const filtered = allOrders.filter(order => order.id.toLowerCase().includes(query.toLowerCase()));
+            renderOrdersList(filtered);
+        }
+    </script>
+
+</body>
+</html>
