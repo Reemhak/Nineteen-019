@@ -561,13 +561,25 @@
             border-radius: 8px;
             cursor: pointer;
             transition: 0.2s;
+            margin-top: 8px;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-done:hover {
             background: #e3b341;
         }
 
-        /* --- نموذج تسجيل الدخول ولوحة التحكم --- */
+        .btn-whatsapp-action {
+            background: #2ea043;
+            color: #ffffff;
+        }
+
+        .btn-whatsapp-action:hover {
+            background: #268537;
+        }
+
+        /* --- لوحة التحكم --- */
         .form-group {
             margin-bottom: 14px;
             text-align: right;
@@ -678,10 +690,6 @@
         </div>
         
         <div class="header-actions">
-            <button class="btn-header" onclick="openLoginModal()">
-                تسجيل الدخول
-            </button>
-
             <button class="btn-header" onclick="openCart()">
                 السلة <span class="cart-count" id="cartCount">0</span>
             </button>
@@ -702,7 +710,7 @@
             <!-- 1. انفنتي تريل -->
             <div class="product-card">
                 <div class="image-container">
-                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531828869663821905/IMG_2850.png?ex=6a6aa24e&is=6a6950ce&hm=508321801e68506367a673e349acf769e498890d059a45dd9badf0fcb9bf4f05&" alt="انفنتي تريل">
+                    <img src="https://i.postimg.cc/L6rpRTfg/IMG-2850.jpg" alt="انفنتي تريل">
                 </div>
                 <div class="product-info">
                     <div class="product-title" style="color: #ffffff;">انفنتي تريل</div>
@@ -717,7 +725,7 @@
             <!-- 2. سير الادمن -->
             <div class="product-card">
                 <div class="image-container">
-                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531826991509143652/IMG_2319.png?ex=6a6aa08e&is=6a694f0e&hm=49be6fbd78646fc68cfa3ea509770108907a324a21af7b8d29e78012a256ec52&" alt="سير الادمن">
+                    <img src="https://i.postimg.cc/d0QvS0rf/IMG-2319.jpg" alt="سير الادمن">
                 </div>
                 <div class="product-info">
                     <div class="product-title" style="color: #ff4d6d;">سير الادمن</div>
@@ -732,7 +740,7 @@
             <!-- 3. سير الكاندي -->
             <div class="product-card">
                 <div class="image-container">
-                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531826991744160015/IMG_2318.png?ex=6a6aa08e&is=6a694f0e&hm=62a040c15e3b99b0ee96c97a9e7855b5bdae8de14d7e233799aaedff296c46b4&" alt="سير الكاندي">
+                    <img src="https://i.postimg.cc/nr4vzTrs/IMG-2318.jpg" alt="سير الكاندي">
                 </div>
                 <div class="product-info">
                     <div class="product-title" style="color: #ff70a6;">سير الكاندي</div>
@@ -747,7 +755,7 @@
             <!-- 4. سير الدايموند -->
             <div class="product-card">
                 <div class="image-container">
-                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531826992360591480/IMG_2317.png?ex=6a6aa08e&is=6a694f0e&hm=5be4d31d092649bad718936aec54783a3236481a1a4fe99d9c06b00318f57f16&" alt="سير الدايموند">
+                    <img src="https://i.postimg.cc/pLGKpmW3/IMG-2317.jpg" alt="سير الدايموند">
                 </div>
                 <div class="product-info">
                     <div class="product-title" style="color: #79c0ff;">سير الدايموند</div>
@@ -762,7 +770,7 @@
             <!-- 5. سير القولد -->
             <div class="product-card">
                 <div class="image-container">
-                    <img src="https://cdn.discordapp.com/attachments/1358374527620350012/1531826992012329101/IMG_2320.png?ex=6a6aa08e&is=6a694f0e&hm=912f2b040cf580b5d21858e33a8a3b8d64928db3331c3bacce46a9743e9d920f&" alt="سير القولد">
+                    <img src="https://i.postimg.cc/vHGnhrDN/IMG-2320.jpg" alt="سير القولد">
                 </div>
                 <div class="product-info">
                     <div class="product-title" style="color: #e3b341;">سير القولد</div>
@@ -822,7 +830,7 @@
         </div>
     </div>
 
-    <!-- النافذة المربعة الصغيرة لإظهار رقم الطلب مع زر "تم" -->
+    <!-- النافذة المربعة الصغيرة لإظهار رقم الطلب مع زر "تم" والواتساب -->
     <div class="modal-overlay" id="orderSuccessModal">
         <div class="small-order-card">
             <div class="small-order-text">
@@ -832,26 +840,8 @@
             <div class="small-order-warning">
                 * في حال غلطت برقم الطلب عند التفعيل حنا غير مسؤولين
             </div>
+            <a id="directWhatsappBtn" href="#" target="_blank" class="btn-done btn-whatsapp-action">إرسال عبر الواتساب</a>
             <button class="btn-done" onclick="closeOrderSuccessModal()">تم</button>
-        </div>
-    </div>
-
-    <!-- نافذة تسجيل الدخول Modal -->
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal-card" style="max-width: 380px;">
-            <div class="modal-header">
-                <h3>تسجيل دخول الإدارة</h3>
-                <button class="close-btn" onclick="closeLoginModal()">&times;</button>
-            </div>
-            <div class="form-group">
-                <label>اسم المستخدم</label>
-                <input type="text" id="adminUser" class="form-control" placeholder="أدخل اسم المستخدم">
-            </div>
-            <div class="form-group">
-                <label>كلمة المرور</label>
-                <input type="password" id="adminPass" class="form-control" placeholder="أدخل كلمة المرور">
-            </div>
-            <button class="btn-submit-admin" onclick="handleLogin()">دخول</button>
         </div>
     </div>
 
@@ -883,6 +873,10 @@
 
     <!-- البرمجة -->
     <script>
+        const whatsappPhoneNumber = "966555304465";
+        const telegramBotToken = "8715749706:AAEDfKEA3gtEMQk7odrHC6Sbi79xgl5bsHE";
+        const telegramChatID = "8275340803";
+
         let cart = [];
         let discountRate = 0;
         let toastTimeout;
@@ -1021,6 +1015,7 @@
 
             const newOrderId = generateUniqueOrderId();
             const totalAmount = document.getElementById('cartTotal').innerText;
+            const itemsText = cart.map(i => `${i.title} (${i.quantity})`).join(', ');
 
             const orderData = {
                 id: newOrderId,
@@ -1032,6 +1027,18 @@
             allOrders.unshift(orderData);
             localStorage.setItem('nineteen_orders', JSON.stringify(allOrders));
 
+            // إرسال الإشعار الفوري للبوت التليجرام
+            const tgMessage = `طلب جديد في المتجر!\nرقم الطلب: ${newOrderId}\nالمنتجات: ${itemsText}\nالإجمالي: ${totalAmount}`;
+            fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: telegramChatID, text: tgMessage })
+            }).catch(err => console.log(err));
+
+            // إعداد رابط الواتساب الجاهز
+            const waMessage = `مرحباً، أود إتمام الطلب الخاص بي:\nرقم الطلب: ${newOrderId}\nالمنتجات: ${itemsText}\nالإجمالي: ${totalAmount}`;
+            document.getElementById('directWhatsappBtn').href = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(waMessage)}`;
+
             cart = [];
             discountRate = 0;
             document.getElementById('couponInput').value = '';
@@ -1039,36 +1046,13 @@
             updateCartUI();
             closeCart();
 
-            // إظهار النافذة المربعة مع رقم الطلب وزر تم
+            // إظهار النافذة المربعة مع رقم الطلب وزر تم والواتساب
             document.getElementById('displayGeneratedCode').innerText = newOrderId;
             document.getElementById('orderSuccessModal').style.display = 'flex';
         }
 
         function closeOrderSuccessModal() {
             document.getElementById('orderSuccessModal').style.display = 'none';
-        }
-
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        function handleLogin() {
-            const user = document.getElementById('adminUser').value.trim();
-            const pass = document.getElementById('adminPass').value.trim();
-
-            if (user === 'Reem' && pass === 'NINETEEN1122!') {
-                showToast('تم تسجيل الدخول بنجاح!');
-                closeLoginModal();
-                document.getElementById('adminUser').value = '';
-                document.getElementById('adminPass').value = '';
-                openOrdersModal();
-            } else {
-                alert('خطأ: اسم المستخدم أو كلمة المرور غير صحيحة!');
-            }
         }
 
         function openOrdersModal() {
